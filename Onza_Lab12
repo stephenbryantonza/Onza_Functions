@@ -1,0 +1,47 @@
+def display_menu():
+    menu = {
+        1: ("Adobo", 150),
+        2: ("Sinigang", 120),
+        3: ("Halo-Halo", 90),
+        4: ("Lechon", 200),
+        5: ("Pancit", 100)
+    }
+    print("\nMenu:")
+    for item_number, (name, price) in menu.items():
+        print(f"{item_number}. {name} - {price} PHP")
+    return menu
+
+def get_order(menu):
+    while True:
+        try:
+            choice = int(input("\nPick an item number: "))
+            if choice in menu:
+                return menu[choice]
+            else:
+                print("Invalid choice. Try again.")
+        except ValueError:
+            print("Invalid input. Use a number.")
+
+def process_payment(total_cost):
+    while True:
+        try:
+            cash = float(input(f"\nTotal: {total_cost} PHP. Cash: "))
+            if cash >= total_cost:
+                change = cash - total_cost
+                print(f"Change: {change:.2f} PHP.")
+                break
+            else:
+                print("Not enough cash. Enter a valid amount.")
+        except ValueError:
+            print("Invalid input. Use a number.")
+
+def main():
+    print("Welcome!")
+    menu = display_menu()
+    item_name, item_price = get_order(menu)
+    print(f"\nYou chose: {item_name} - {item_price} PHP")
+    process_payment(item_price)
+    print("\nThanks for your order!")
+
+if __name__ == "__main__":
+    main()
